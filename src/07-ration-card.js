@@ -52,16 +52,44 @@
  *   hasRationCard({"RC001":{...}}, "RC001") // => true
  *   removeRationCard(registry, "RC001")    // => true
  */
+/* getFamilyNames(registry)
+ *      - Object.keys() se saare ration card IDs nikalo
+ *      - Agar registry object nahi hai ya null hai, return []
+ *      - Example: getFamilyNames({"RC001":{...},"RC002":{...}}) => ["RC001", "RC002"]*/
 export function getFamilyNames(registry) {
   // Your code here
+  if(typeof registry !=="object" || registry == null || Array.isArray(registry)){
+    return []
+  }
+  const familyNames = Object.keys(registry)
+  return familyNames
 }
-
+/* getAllFamilies(registry)
+ *      - Object.values() se saari family objects nikalo
+ *      - Agar registry object nahi hai ya null hai, return []
+ *      - Example: getAllFamilies({"RC001":{head:"Ram"}}) => [{head:"Ram"}]
+ **/
 export function getAllFamilies(registry) {
   // Your code here
+  if(typeof registry !=="object" || registry == null){
+    return []
+  }
+  const head = Object.values(registry)
+return head
+
 }
+/*getRationCardEntries(registry)
+ *      - Object.entries() se [id, family] pairs nikalo
+ *      - Agar registry object nahi hai ya null hai, return []
+ *      - Example: getRationCardEntries({"RC001":{head:"Ram"}}) => [["RC001",{head:"Ram"}]]*/
 
 export function getRationCardEntries(registry) {
   // Your code here
+  if(typeof registry !=="object" || registry == null){
+    return []
+  }
+  const entries = Object.entries(registry)
+  return 
 }
 
 export function hasRationCard(registry, cardId) {

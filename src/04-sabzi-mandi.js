@@ -49,20 +49,63 @@
  */
 export function addToCart(cart, item) {
   // Your code here
+  if(!(Array.isArray(cart))){
+    return -1
+  }
+  if(item.length<=0|| typeof item!=="string"){
+    return cart.length
+  }
+  cart.push(item)
+  return cart.length
 }
 
 export function addUrgentItem(cart, item) {
-  // Your code here
+  if (!Array.isArray(cart)) {
+    return [];
+  }
+
+  if (typeof item !== "string"||item.length === 0) {
+    return cart;
+  }
+
+  cart.unshift(item); // mutate as instructed
+  return cart;
 }
 
 export function removeLastItem(cart) {
   // Your code here
+  if(!Array.isArray(cart) || cart.length<=0){
+    return undefined
+  }
+  let item = cart.pop()
+  return item
+
 }
 
 export function isInCart(cart, item) {
   // Your code here
+  if(!Array.isArray(cart)){
+    return false
+  }
+ return cart.includes(item)
 }
-
+/*mergeCarts(cart1, cart2)
+ *      - .concat() se do carts ko combine karo
+ *      - Return: new merged array
+ *      - Agar koi bhi array nahi hai, usse empty array [] maan lo
+ *      - Example: mergeCarts(["tamatar"], ["mirchi", "adrak"]) => ["tamatar", "mirchi", "adrak"]*/
 export function mergeCarts(cart1, cart2) {
   // Your code here
+  
+ if(!Array.isArray(cart1)||cart1.length<=0){
+  let cart1=[]
+   return cart1.concat(cart2)
+ }
+ if(!Array.isArray(cart2)||cart2.length<=0){
+  let cart2=[]
+   return cart1.concat(cart2)
+ }
+return cart1.concat(cart2)
+  
+
 }

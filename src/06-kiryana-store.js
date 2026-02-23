@@ -50,22 +50,74 @@
  *   calculateTotal([{price:40,qty:2},...])    // => 160
  *   formatBill([{name:"Atta",price:40,qty:2}]) // => "Atta x 2 = Rs.80"
  */
+/* getItemNames(items)
+ *      - .map() se sirf names nikalo
+ *      - Agar items array nahi hai, return []
+ *      - Example: getItemNames([{name:"Atta",price:40,qty:2}]) => ["Atta"]*/
 export function getItemNames(items) {
   // Your code here
+  if(!Array.isArray(items)){
+    return []
+  }
+  const names = items.map(item=>item.name)
+  return names
 }
+/* getAffordableItems(items, maxPrice)
+ *      - .filter() se items nikalo jinka price <= maxPrice
+ *      - Agar items array nahi hai ya maxPrice number nahi hai, return []
+ *      - Example: getAffordableItems([{name:"Atta",price:40},{name:"Ghee",price:500}], 100)
+ *                 => [{name:"Atta",price:40}]*/
 
 export function getAffordableItems(items, maxPrice) {
   // Your code here
+  if(!Array.isArray(items) || typeof maxPrice !=="number"){
+    return []
+  }
+  const affordableItems = items.filter(item=>item.price<=maxPrice)
+  return affordableItems
 }
-
+/* calculateTotal(items)
+ *      - .reduce() se (price * qty) ka sum nikalo
+ *      - Agar items array nahi hai ya empty hai, return 0
+ *      - Example: calculateTotal([{name:"Atta",price:40,qty:2},{name:"Daal",price:80,qty:1}])
+ *                 => 160*/
 export function calculateTotal(items) {
   // Your code here
+  if(!Array.isArray(items)||items.length<=0){
+    return 0
+  }
+const total = items.reduce((a, item) => a + item.price * item.qty, 0)
+return total
 }
+/*sortByPrice(items, ascending)
+ *      - [...items].sort() se NEW sorted array return karo (original mat badlo!)
+ *      - ascending = true => low to high, false => high to low
+ *      - Agar items array nahi hai, return []
+ *      - Example: sortByPrice([{name:"Ghee",price:500},{name:"Atta",price:40}], true)
+ *                 => [{name:"Atta",price:40},{name:"Ghee",price:500}]*/
 
 export function sortByPrice(items, ascending) {
   // Your code here
+  if(!Array.isArray(items)){
+    return []
+  }
+const sortedArray = [...items].sort((a,b)=>ascending?a.price-b.price:b.price-a.price)
+return sortedArray
+
+
 }
 
+/*formatBill(items)
+ *      - .map() se har item ko "name x qty = Rs.total" format karo
+ *      - Phir .join("\n") se multi-line bill banao
+ *      - Agar items array nahi hai ya empty hai, return ""
+ *      - Example: formatBill([{name:"Atta",price:40,qty:2}]) => "Atta x 2 = Rs.80"*/
 export function formatBill(items) {
   // Your code here
+  if(!Array.isArray(items)){
+    return ""
+  }
+  const formattedBill = [...items].map(item=>`${item.name} x ${item.qty} = Rs.${item.price*item.qty}`).join("\n")
+  return formattedBill
+
 }
