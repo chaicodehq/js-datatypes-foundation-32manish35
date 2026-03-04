@@ -87,15 +87,41 @@ export function getRationCardEntries(registry) {
   // Your code here
   if(typeof registry !=="object" || registry == null){
     return []
+
   }
   const entries = Object.entries(registry)
-  return 
+  return entries
 }
-
+/* hasRationCard(registry, cardId)
+ *      - .hasOwnProperty() se check karo ki specific ration card hai ya nahi
+ *      - Agar registry object nahi hai ya cardId string nahi hai, return false
+ *      - Example: hasRationCard({"RC001":{head:"Ram"}}, "RC001") => true
+ *      - Example: hasRationCard({"RC001":{head:"Ram"}}, "RC999") => false
+ * */
 export function hasRationCard(registry, cardId) {
   // Your code here
+  if(typeof registry !=="object" || registry == null){
+    return false
 }
-
+const hasCard = registry.hasOwnProperty(cardId)
+return hasCard
+}
+/*removeRationCard(registry, cardId)
+ *      - delete operator se ration card remove karo
+ *      - Pehle hasOwnProperty se check karo ki card hai ya nahi
+ *      - Return true agar card tha aur delete hua, false otherwise
+ *      - Agar registry object nahi hai ya cardId string nahi hai, return false
+ *      - Example: removeRationCard({"RC001":{head:"Ram"}}, "RC001") => true*/
 export function removeRationCard(registry, cardId) {
   // Your code here
+  if(typeof registry !=="object" || registry == null || typeof cardId !== "string"){
+    return false
+}
+if(registry.hasOwnProperty(cardId)){
+  delete registry[cardId];
+  return true
+}
+return false;
+
+
 }

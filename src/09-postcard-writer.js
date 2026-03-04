@@ -51,22 +51,77 @@
  *   isValidPincode("400001")   // => true
  *   countVowels("Namaste")     // => 3
  */
+/*
+writePostcard(sender, receiver, message)
+ *      - Template literal se formatted postcard banao:
+ *        "Priy {receiver},\n\n{message}\n\nAapka/Aapki,\n{sender}"
+ *      - Agar koi bhi param string nahi hai ya trim ke baad empty hai, return ""
+ *      - Example: writePostcard("Guddu", "Dadi ji", "Hum theek hain")
+ *                 => "Priy Dadi ji,\n\nHum theek hain\n\nAapka/Aapki,\nGuddu" */
 export function writePostcard(sender, receiver, message) {
   // Your code here
-}
 
+  if(typeof sender !== "string" || typeof receiver !== "string" || typeof message !== "string" ){
+    return ""
+  }
+  let senderFinal = sender.trim()
+  let receiverFinal = receiver.trim()
+  let messageFinal = message.trim()
+  if(senderFinal.length<=0||receiverFinal.length<=0||messageFinal.length<=0){
+    return ""
+  }
+  return `Priy ${receiverFinal},\n\n${messageFinal}\n\n\Aapka/Aapki,\n${senderFinal}`
+  
+
+
+}
+/*
+ isValidPincode(code)
+ *      - Indian pincodes: 6 digits, "0" se start nahi hota
+ *      - .startsWith("0") se check karo ki "0" se start nahi ho raha
+ *      - .length === 6 check karo
+ *      - Har character digit hona chahiye (use /^\d+$/ regex test or check each char)
+ *      - Agar code string nahi hai, return false
+ *      - Example: isValidPincode("400001") => true
+ *      - Example: isValidPincode("012345") => false
+*/
 export function isValidPincode(code) {
   // Your code here
+ 
+  if(/^\d+$/.test(code)&&code.length===6&&typeof code ==="string"&&!(code.startsWith(0))){
+    return true
+  }
+  else {
+    return false
+  }
+}
+/*formatPostcardField(label, value, width)
+ *      - label.padEnd(width) + ": " + value — for aligned fields
+ *      - Wait, let me simplify: return label.padEnd(12) + ": " + value
+ *      - Agar width provided, use that instead of 12
+ *      - Agar label ya value string nahi hai, return ""
+ *      - Example: formatPostcardField("From", "Guddu") => "From        : Guddu"
+ *      - Example: formatPostcardField("To", "Dadi ji", 8) => "To      : Dadi ji"*/ 
+export function formatPostcardField(label, value, width) {
+  if (typeof label !== "string" || typeof value !== "string") {
+    return "";
+  }
+  const padWidth = width !== undefined ? width : 12;
+  return label.padEnd(padWidth) + ": " + value;
 }
 
-export function formatPostcardField(label, value, width) {
-  // Your code here
-}
 
 export function isFromState(address, stateCode) {
-  // Your code here
+  if (typeof address !== "string" || typeof stateCode !== "string") {
+    return false;
+  }
+  return address.endsWith(stateCode);
 }
 
 export function countVowels(message) {
-  // Your code here
+  if (typeof message !== "string") {
+    return 0;
+  }
+  const matches = message.match(/[aeiouAEIOU]/g);
+  return matches ? matches.length : 0;
 }
