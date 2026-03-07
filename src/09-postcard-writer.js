@@ -103,25 +103,41 @@ export function isValidPincode(code) {
  *      - Example: formatPostcardField("From", "Guddu") => "From        : Guddu"
  *      - Example: formatPostcardField("To", "Dadi ji", 8) => "To      : Dadi ji"*/ 
 export function formatPostcardField(label, value, width) {
-  if (typeof label !== "string" || typeof value !== "string") {
-    return "";
+  // Your code here
+  if(typeof label !== "string" || typeof value !== "string"){
+    return ""
   }
-  const padWidth = width !== undefined ? width : 12;
-  return label.padEnd(padWidth) + ": " + value;
+  width = width || 12
+  return label.padEnd(width) + ": " + value
 }
-
-
+/*isFromState(address, stateCode)
+ *      - .endsWith() se check karo ki address kisi state code se end hota hai
+ *      - Agar address ya stateCode string nahi hai, return false
+ *      - Example: isFromState("Guddu, Lucknow, UP", "UP") => true
+ *      - Example: isFromState("Priya, Mumbai, MH", "UP") => false*/
 export function isFromState(address, stateCode) {
-  if (typeof address !== "string" || typeof stateCode !== "string") {
-    return false;
+  // Your code here
+  if(typeof address !== "string" || typeof stateCode!=="string"){
+    return false
   }
-  return address.endsWith(stateCode);
+  if(address.endsWith(stateCode)){
+    return true
+  }
+  else {
+    return false
+  }
 }
-
+/*countVowels(message)
+ *      - .match(/[aeiouAEIOU]/g) se saare vowels dhundho
+ *      - Return: count (match result ki length, ya 0 agar null hai)
+ *      - Agar message string nahi hai, return 0
+ *      - Example: countVowels("Namaste India") => 6*/
 export function countVowels(message) {
-  if (typeof message !== "string") {
-    return 0;
+  // Your code here
+  if(typeof message !=="string" || message.trim().length<=0){
+    return 0
   }
-  const matches = message.match(/[aeiouAEIOU]/g);
-  return matches ? matches.length : 0;
+  let count = message.toLowerCase().match(/[aeiou]/g) || []
+  
+   return count.length
 }
